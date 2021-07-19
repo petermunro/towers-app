@@ -1,23 +1,18 @@
-import { useState } from "react";
 import "./App.css";
 import Column from "./components/Column";
-
-const defaultHeight = 7;
-const columnHeightLimit = 12;
-
-function getClampedHeight(height) {
-  return Math.max(Math.min(height, columnHeightLimit), 0);
-}
+import { useDispatch, useSelector } from "react-redux";
+import { createRaiseAction, createLowerAction } from "./actions";
 
 function App() {
-  let [height, setHeight] = useState(defaultHeight);
+  const dispatch = useDispatch();
+  const height = useSelector((state) => state.height);
 
   function raise() {
-    setHeight((height) => getClampedHeight(height + 1));
+    dispatch(createRaiseAction());
   }
 
   function lower() {
-    setHeight((height) => getClampedHeight(height - 1));
+    dispatch(createLowerAction());
   }
 
   return (
