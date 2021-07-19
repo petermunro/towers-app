@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import Column from "./Column";
+import Column from "./components/Column";
 
 const defaultHeight = 7;
 const columnHeightLimit = 12;
