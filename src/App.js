@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Column from "./Column";
+
+const defaultHeight = 7;
+const columnHeightLimit = 12;
+
+function getClampedHeight(height) {
+  return Math.max(Math.min(height, columnHeightLimit), 0);
+}
 
 function App() {
+  let [height, setHeight] = useState(defaultHeight);
+
+  function raise() {
+    setHeight((height) => getClampedHeight(height + 1));
+  }
+
+  function lower() {
+    setHeight((height) => getClampedHeight(height - 1));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Column onRaise={raise} onLower={lower} height={height} />
     </div>
   );
 }
