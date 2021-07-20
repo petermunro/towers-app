@@ -1,4 +1,4 @@
-import { RAISE_ACTION, LOWER_ACTION } from "./actions";
+import { RAISE_ACTION, LOWER_ACTION, SET_HEIGHT_ACTION } from "./actions";
 
 const defaultHeight = 7;
 const columnHeightLimit = 12;
@@ -22,6 +22,11 @@ export function towersReducer(state = initialState, action) {
       return {
         ...state,
         height: getClampedHeight(state.height - 1),
+      };
+    case SET_HEIGHT_ACTION:
+      return {
+        ...state,
+        height: getClampedHeight(action.requestedHeight),
       };
     default:
       return state;
